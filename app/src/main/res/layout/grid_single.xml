@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    app:cardCornerRadius="0dp"
+    android:layout_marginTop="0dp"
+    android:background="#f0eff4"
+    android:foreground="?android:attr/selectableItemBackground">
+<!--  app:cardElevation="0.7dp"
+  app:contentPadding="10dp"
+  app:contentPaddingBottom="0dp"
+  app:cardPreventCornerOverlap="true"
+  app:cardUseCompatPadding="true"-->
+  <RelativeLayout
+      android:id="@+id/grid_cardview"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="0dp"
+      android:background="#f0eff4"
+      android:layout_centerVertical="true"
+      android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/grid_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/beaches"
+        />
+
+    <TextView
+        android:id="@+id/grid_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid_image"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="#f0eff4"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="#53585b"
+        android:textStyle="normal"
+       />
+  </RelativeLayout>
+
+    <!--android:background="#D9F2FC"-->
+</android.support.v7.widget.CardView>
+
+
+<!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="5dp"
+    android:layout_height="200dp">
+
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/spacecraftImg"
+        android:src="@drawable/logobar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:text="Name"
+          android:id="@+id/nameTxt"
+          android:padding="10dp"
+          android:textColor="@color/colorAccent"
+          android:textStyle="bold"
+          android:layout_alignParentLeft="true"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:text="Propellant....................."
+          android:lines="1"
+          android:id="@+id/propellantTxt"
+          android:padding="10dp"
+          android:layout_alignParentLeft="true"
+          />
+    </LinearLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>-->
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="0dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">-->
+<!--
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle"
+        android:contentDescription="Green Tick Button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/carousel1" />
+  -->
+
+
+  <!--<Button
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:background="@drawable/circle"
+      android:drawableTop="@android:drawable/ic_dialog_email"
+      android:paddingTop="20dp"
+      android:text="Contact"
+      android:textColor="#fff"
+      app:srcCompat="@drawable/carousel1"/>-->
+ <!-- <ImageView
+        android:id="@+id/grid_image"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/logobar"></ImageView>
+    <TextView
+        android:id="@+id/grid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="Bars"
+        android:textSize="12sp" >
+    </TextView>
+
+</LinearLayout>-->
