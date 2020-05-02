@@ -19,7 +19,7 @@
         android:textStyle="bold"
         app:itemIconTint="#ffffff"
         app:itemTextColor="@drawable/bottom_nav_colors"
-        app:itemIconSize="25dp"
+        app:itemIconSize="22dp"
         app:itemIconPadding="20dp"
         app:menu="@menu/bottom_navigation_main"
         app:labelVisibilityMode="labeled"/>

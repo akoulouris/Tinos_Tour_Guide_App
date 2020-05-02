@@ -7,4 +7,8 @@
         <item name="colorPrimaryDark">@color/myColor</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Animation">
+        <item name="android:windowEnterAnimation">@anim/item_animation_slide_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/item_animation_slide_out_from_bottom</item>
+    </style>
 </resources>

@@ -3,20 +3,29 @@ package com.example.sailinn.fragments;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 import com.example.sailinn.R;
 import android.widget.AdapterView;
@@ -75,6 +84,29 @@ public class MainFragment extends Fragment implements OnBackPressed {
 
     };
 
+    public static void dimBehind(PopupWindow popupWindow) {
+        View container;
+        if (popupWindow.getBackground() == null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                container = (View) popupWindow.getContentView().getParent();
+            } else {
+                container = popupWindow.getContentView();
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                container = (View) popupWindow.getContentView().getParent().getParent();
+            } else {
+                container = (View) popupWindow.getContentView().getParent();
+            }
+        }
+        Context context = popupWindow.getContentView().getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+        p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        p.dimAmount = 0.8f;
+        wm.updateViewLayout(container, p);
+    }
+
 
 
     @Override
@@ -125,9 +157,30 @@ public class MainFragment extends Fragment implements OnBackPressed {
 
 
         Beach _beach = new Beach("");
-
+         // initialize bottomNavigationView AND  click event
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.action_Me) {
+                    Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
+                    View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.popup_window_settings, null);
+                    int width = Math.round((display.getWidth()*98)/100); // LinearLayout.LayoutParams.MATCH_PARENT;
+                    int height = Math.round((display.getHeight()*40)/100);
+                    final PopupWindow popupWindow = new PopupWindow(popupView, width, height,true);
+                    popupWindow.setBackgroundDrawable(null);
+                    //Toast.makeText(view.getContext(), "Hello toast!", Toast.LENGTH_SHORT).show();
+                    popupWindow.setAnimationStyle(R.style.Animation);
+                    popupWindow.showAtLocation(popupView, Gravity.BOTTOM,0, 0);
+                    dimBehind(popupWindow);
+                    return true;
+                }
+                return true;
+            }
+        });
+
+
        // String url = "http://127.0.0.1:5000/";
 
 

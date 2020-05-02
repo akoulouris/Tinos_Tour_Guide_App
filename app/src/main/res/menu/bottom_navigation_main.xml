@@ -10,7 +10,7 @@
         android:textColor="#969b9f"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_schedules"
+        android:id="@+id/action_Favorite"
         android:enabled="true"
         android:icon="@drawable/bottom_nav_icon2"
         android:title="Favorite"
@@ -18,7 +18,7 @@
         android:textColor="#969b9f"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_music"
+        android:id="@+id/action_Me"
         android:enabled="true"
         android:textStyle="bold"
         android:icon="@drawable/bottom_nav_icon3"
