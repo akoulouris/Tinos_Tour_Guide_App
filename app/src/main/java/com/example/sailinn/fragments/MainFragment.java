@@ -119,7 +119,6 @@ public class MainFragment extends Fragment implements OnBackPressed {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_main, container, false);
-
         //Animations
         mainLogoAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.main_logo_animation);
         mainMenuAnim= AnimationUtils.loadAnimation(view.getContext(), R.anim.main_menu_animation);
@@ -152,13 +151,16 @@ public class MainFragment extends Fragment implements OnBackPressed {
         viewflipper.getLayoutParams().height=Math.round((display.getHeight()*40)/100);
         view.findViewById(R.id.logomain).getLayoutParams().height=Math.round((display.getHeight()*40)/100);
 
-
-
+        //Completely transparent Status Bar
+        getActivity().getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
 
 
         Beach _beach = new Beach("");
          // initialize bottomNavigationView AND  click event
-        bottomNavigationView = view.findViewById(R.id.bottom_navigation);
+       bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -174,6 +176,22 @@ public class MainFragment extends Fragment implements OnBackPressed {
                     popupWindow.setAnimationStyle(R.style.Animation);
                     popupWindow.showAtLocation(popupView, Gravity.BOTTOM,0, 0);
                     dimBehind(popupWindow);
+                    return true;
+                }
+                else if (item.getItemId() == R.id.action_Favorite){
+                    Toast.makeText(view.getContext(), "Hello toast!", Toast.LENGTH_SHORT).show();
+
+                  //  android.support.v4.app.FragmentTransaction trasection = getFragmentManager().beginTransaction();
+
+                  android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                  //  trasection.replace(R.id.fEVORITE_fragment,new ListFragment());
+                  //  trasection.addToBackStack(null);
+                    //trasection.commit();
+
+                  // ft.hide(getActivity().getSupportFragmentManager().findFragmentById(R.id.headlines_fragment));
+                    ft.replace(R.id.headlines_fragment,new ListFragment());
+                   ft.addToBackStack(null);
+                   ft.commit();
                     return true;
                 }
                 return true;

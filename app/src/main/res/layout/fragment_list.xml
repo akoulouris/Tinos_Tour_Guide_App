@@ -7,8 +7,8 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="20dp"
         android:layoutAnimation="@anim/layout_animation_slid_from_bottom"
         />
    <!-- android:background="@drawable/sandybackground"-->

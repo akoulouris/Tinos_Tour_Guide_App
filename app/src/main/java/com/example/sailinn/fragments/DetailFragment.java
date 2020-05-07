@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import com.example.sailinn.adapters.ViewPagerAdapter;
 
@@ -47,6 +48,10 @@ public class DetailFragment   extends Fragment {
         mToolbar.setVisibility(View.GONE);
 
        Toolbar mToolbark = view.findViewById(R.id.htab_toolbar);
+        getActivity().getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+        );
 
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbark);

@@ -2,10 +2,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#B3D9F2FC" />
+            <solid android:color="#2e60df" />
         </shape>
     </item>
-    <item>
+   <!-- <item>
         <bitmap android:src="@drawable/logobar" android:gravity="left" />
-    </item>
+    </item>-->
 </layer-list>

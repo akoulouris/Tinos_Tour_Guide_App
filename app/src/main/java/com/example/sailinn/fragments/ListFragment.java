@@ -1,6 +1,5 @@
 package com.example.sailinn.fragments;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,33 +10,45 @@ import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
-import android.widget.ViewFlipper;
+import android.view.WindowManager;
+
 import com.example.sailinn.R;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import com.example.sailinn.adapters.AdaptorRecyclerView;
+import com.example.sailinn.model.ListItem;
+
 import android.widget.Toast;
 import java.util.List;
 import java.util.ArrayList;
 
 public   class ListFragment  extends Fragment {
     private View  view;
-    private List<Person> persons;
+   // private List<Person> persons;
+    private List<ListItem> listItems;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_list, container, false);
 
+        //clear Completely transparent Status Bar
+        getActivity().getWindow().clearFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
+        getActivity().getWindow().clearFlags(
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+        );
 
         Toolbar mToolbar = getActivity().findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.VISIBLE);
-
+        mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        mToolbar.setTitle("Beaches");
 
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
         initializeData();
 
-        AdaptorRecyclerView adapter = new AdaptorRecyclerView(persons);
+        AdaptorRecyclerView adapter = new AdaptorRecyclerView(listItems,getActivity());
         rv.setAdapter(adapter);
 
 
@@ -79,23 +90,30 @@ public   class ListFragment  extends Fragment {
             }
         });
 
-
-
         return view;
     }
+
+    public  void initializeData2(){
+      // persons = new ArrayList<>();
+       // persons.add(new Person("Emma Wilson", "23 years old", R.drawable.bars));
+      //  persons.add(new Person("Lavery Maiss", "25 years old", R.drawable.beaches));
+      //  persons.add(new Person("Lillie Watts", "35 years old", R.drawable.carousel1));
+    }
+
+
     public  void initializeData(){
-        persons = new ArrayList<>();
-        persons.add(new Person("Emma Wilson", "23 years old", R.drawable.bars));
-        persons.add(new Person("Lavery Maiss", "25 years old", R.drawable.beaches));
-       persons.add(new Person("Lillie Watts", "35 years old", R.drawable.carousel1));
+        listItems = new ArrayList<>();
+        listItems.add(new ListItem(R.drawable.bars,"Emma Wilson","0","0"));
+        listItems.add(new ListItem(R.drawable.beaches,"Lavery Maiss","1","0" ));
+        listItems.add(new ListItem(R.drawable.carousel1,"Lillie Watts", "2", "0"));
     }
 
     public class Person {
-        String name;
-        String age;
-        int photoId;
+        public  String name;
+        public  String age;
+        public  int photoId;
 
-        Person(String name, String age, int photoId) {
+        public  Person(String name, String age, int photoId) {
             this.name = name;
             this.age = age;
             this.photoId = photoId;

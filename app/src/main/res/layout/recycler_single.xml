@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="3dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     >
 
@@ -42,8 +44,14 @@
         android:clipChildren="false"
         card_view:cardElevation="10dp"
         card_view:cardPreventCornerOverlap="false">-->
-
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        card_view:cardCornerRadius="4dp"
+        android:layout_marginTop="20dp">
+  <!--  <android.support.v7.widget.CardView
         android:id="@+id/cv"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -55,7 +63,7 @@
         android:clipChildren="false"
         app:cardElevation="10dp"
         android:layout_margin="4dp"
-        app:cardPreventCornerOverlap="false">
+        app:cardPreventCornerOverlap="false">-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -64,10 +72,10 @@
             <ImageView
                 android:id="@+id/person_photo"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="140dp"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/beaches" />
+                android:src="@drawable/beaches"/>
 
             <TextView
                 android:id="@+id/person_name"
@@ -78,8 +86,10 @@
                 android:padding="8dp"
                 android:text="Title"
                 android:textColor="#222"
-                android:textSize="22dp"
-                android:textStyle="bold" />
+                android:textSize="20dp"
+                android:textStyle="normal" />
+
+
 
             <!-- <TextView
                 android:layout_width="wrap_content"
@@ -121,5 +131,16 @@
 -->
         </RelativeLayout>
 
+        <CheckBox
+            android:id="@+id/favBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom|end"
+            android:button="@null"
+            android:checked="false"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/ic_favorite_shadow_24dp"
+            android:stateListAnimator="@drawable/like_animation"/>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -41,7 +41,8 @@
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:fitsSystemWindows="true"
                     android:transitionName="kittenImage">
 
                 </android.support.v4.view.ViewPager>
