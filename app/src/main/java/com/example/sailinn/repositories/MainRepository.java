@@ -21,6 +21,7 @@ public class MainRepository {
 
     // Pretend to get data from a webservice or online source
     public MutableLiveData<List<MainMenu>> getMainMenu(){
+        dataSet.clear();
         setMainMenu();
         MutableLiveData<List<MainMenu>> data = new MutableLiveData<>();
         data.setValue(dataSet);

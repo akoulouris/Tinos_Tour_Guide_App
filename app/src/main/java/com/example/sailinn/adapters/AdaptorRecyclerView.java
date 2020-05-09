@@ -47,7 +47,6 @@ public class AdaptorRecyclerView extends RecyclerView.Adapter<AdaptorRecyclerVie
         }
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_single, viewGroup, false);
         ViewHolder pvh = new ViewHolder(v);
-
         return pvh;
     }
 

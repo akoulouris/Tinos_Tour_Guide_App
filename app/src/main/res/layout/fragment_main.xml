@@ -29,6 +29,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:textStyle="bold"
+       android:visibility="gone"
         app:itemIconTint="#ffffff"
         app:itemTextColor="@drawable/bottom_nav_colors"
         app:itemIconSize="22dp"
@@ -36,10 +37,10 @@
         app:menu="@menu/bottom_navigation_main"
         app:labelVisibilityMode="labeled"/>
 
-    <FrameLayout
+<!--    <FrameLayout
         android:id="@+id/fEVORITE_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
 
 
     <RelativeLayout

@@ -43,7 +43,7 @@ public class DetailFragment   extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_detail, container, false);
 
-
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
         Toolbar mToolbar = getActivity().findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.GONE);
 

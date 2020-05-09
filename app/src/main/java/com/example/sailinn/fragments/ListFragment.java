@@ -38,11 +38,14 @@ public   class ListFragment  extends Fragment {
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         );
 
+        //Display Toolbar and set Title
         Toolbar mToolbar = getActivity().findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.VISIBLE);
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         mToolbar.setTitle("Beaches");
 
+        //hide the bottom navigation bar
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));

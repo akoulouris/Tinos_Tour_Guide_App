@@ -119,6 +119,7 @@ public class MainFragment extends Fragment implements OnBackPressed {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_main, container, false);
+        getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.VISIBLE);
         //Animations
         mainLogoAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.main_logo_animation);
         mainMenuAnim= AnimationUtils.loadAnimation(view.getContext(), R.anim.main_menu_animation);
@@ -160,7 +161,7 @@ public class MainFragment extends Fragment implements OnBackPressed {
 
         Beach _beach = new Beach("");
          // initialize bottomNavigationView AND  click event
-       bottomNavigationView = view.findViewById(R.id.bottom_navigation);
+      /* bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -196,7 +197,7 @@ public class MainFragment extends Fragment implements OnBackPressed {
                 }
                 return true;
             }
-        });
+        });*/
 
 
        // String url = "http://127.0.0.1:5000/";
@@ -218,6 +219,7 @@ public class MainFragment extends Fragment implements OnBackPressed {
         adapter = new CustomGrid(view.getContext(),mMAinViewModel.getMainMenu().getValue(),relativeGridHeight2);
 
         grid=(GridView)view.findViewById(R.id.grid);
+        grid.setAdapter(null);
         grid.setAdapter(adapter);
 
         Bundle args = getArguments();
