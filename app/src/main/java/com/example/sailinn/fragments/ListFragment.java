@@ -1,7 +1,13 @@
 package com.example.sailinn.fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +21,7 @@ import android.view.WindowManager;
 import com.example.sailinn.R;
 import com.example.sailinn.adapters.AdaptorRecyclerView;
 import com.example.sailinn.model.ListItem;
+import com.example.sailinn.viewmodels.ListViewModel;
 
 import android.widget.Toast;
 import java.util.List;
@@ -23,12 +30,19 @@ import java.util.ArrayList;
 public   class ListFragment  extends Fragment {
     private View  view;
    // private List<Person> persons;
-    private List<ListItem> listItems;
+   // private List<ListItem> listItems;
+    private ListViewModel mListViewModel;
+    private AdaptorRecyclerView adapter;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_list, container, false);
+
+        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+
+        Bundle args = getArguments();
+        String Origin = args.containsKey("Origin") ? args.getString("Origin") : "";
 
         //clear Completely transparent Status Bar
         getActivity().getWindow().clearFlags(
@@ -49,19 +63,50 @@ public   class ListFragment  extends Fragment {
 
         RecyclerView rv = view.findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        initializeData();
 
-        AdaptorRecyclerView adapter = new AdaptorRecyclerView(listItems,getActivity());
+        //ViewModel
+        mListViewModel = ViewModelProviders.of(this).get(ListViewModel.class);
+
+
+        //Set adaptor
+        if (Origin=="Beach") {
+            mListViewModel.initBeach();
+            mListViewModel.getListBeach().observe(this, new Observer<List<ListItem>>() {
+                @Override
+                public void onChanged(@Nullable List<ListItem> listItem) {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+            adapter = new AdaptorRecyclerView(mListViewModel.getListBeach().getValue(),getActivity());
+        }
+        else if (Origin=="Lunch") {
+            mListViewModel.initLunch();
+            mListViewModel.getListLunch().observe(this, new Observer<List<ListItem>>() {
+                @Override
+                public void onChanged(@Nullable List<ListItem> listItem) {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+            adapter = new AdaptorRecyclerView(mListViewModel.getListLunch().getValue(),getActivity());
+        }
+        else {
+            mListViewModel.init();
+            mListViewModel.getList().observe(this, new Observer<List<ListItem>>() {
+                @Override
+                public void onChanged(@Nullable List<ListItem> listItem) {
+                    adapter.notifyDataSetChanged();
+                }
+            });
+            adapter = new AdaptorRecyclerView(mListViewModel.getList().getValue(),getActivity());
+        }
+
+
         rv.setAdapter(adapter);
 
-
-
+         //Set set On Item Click
         adapter.setOnItemClickListener(new AdaptorRecyclerView.ClickListener() {
-
-
             public void onItemClick(int position, View v,int s) {
                // Toast.makeText(view.getContext(), "You Clicked at " + position, Toast.LENGTH_SHORT).show();
-
                 Bundle args = new Bundle();
                 args.putInt("image_number", s);
 
@@ -74,8 +119,6 @@ public   class ListFragment  extends Fragment {
                     setExitTransition(new Fade());
                     details.setSharedElementReturnTransition(new DetailsTransition());
                 }
-
-
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .addSharedElement(v.findViewById(R.id.person_photo),"kittenImage")
@@ -96,22 +139,7 @@ public   class ListFragment  extends Fragment {
         return view;
     }
 
-    public  void initializeData2(){
-      // persons = new ArrayList<>();
-       // persons.add(new Person("Emma Wilson", "23 years old", R.drawable.bars));
-      //  persons.add(new Person("Lavery Maiss", "25 years old", R.drawable.beaches));
-      //  persons.add(new Person("Lillie Watts", "35 years old", R.drawable.carousel1));
-    }
-
-
-    public  void initializeData(){
-        listItems = new ArrayList<>();
-        listItems.add(new ListItem(R.drawable.bars,"Emma Wilson","0","0"));
-        listItems.add(new ListItem(R.drawable.beaches,"Lavery Maiss","1","0" ));
-        listItems.add(new ListItem(R.drawable.carousel1,"Lillie Watts", "2", "0"));
-    }
-
-    public class Person {
+   /* public class Person {
         public  String name;
         public  String age;
         public  int photoId;
@@ -121,5 +149,5 @@ public   class ListFragment  extends Fragment {
             this.age = age;
             this.photoId = photoId;
         }
-    }
+    }*/
 }

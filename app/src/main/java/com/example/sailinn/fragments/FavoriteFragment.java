@@ -18,6 +18,7 @@ import android.view.WindowManager;
 
 import com.example.sailinn.R;
 import com.example.sailinn.adapters.FavAdapter;
+import com.example.sailinn.helper.EmptyRecyclerView;
 import com.example.sailinn.helper.FavDB;
 import com.example.sailinn.model.FavItem;
 
@@ -25,7 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteFragment extends Fragment {
-    private RecyclerView recyclerView;
+   // private RecyclerView recyclerView;
+   private EmptyRecyclerView recyclerView;
     private FavDB favDB;
     private List<FavItem> favItemList = new ArrayList<>();
     private FavAdapter favAdapter;
@@ -79,6 +81,7 @@ public class FavoriteFragment extends Fragment {
                 cursor.close();
             db.close();
         }
+        recyclerView.setEmptyView(view.findViewById(R.id.empty_view));
         favAdapter = new FavAdapter(getActivity(), favItemList);
         recyclerView.setAdapter(favAdapter);
     }
@@ -97,6 +100,7 @@ public class FavoriteFragment extends Fragment {
                 favAdapter.notifyItemRemoved(position); // item removed from recyclerview
                 favItemList.remove(position); //then remove item
                 favDB.remove_fav(favItem.getKey_id()); // remove item from database
+                recyclerView.setEmptyView(view.findViewById(R.id.empty_view));
             }
         }
     };

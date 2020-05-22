@@ -2,6 +2,8 @@ package com.example.sailinn.fragments;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -27,22 +29,35 @@ import android.widget.GridView;
 import android.widget.Toast;
 import java.util.List;
 import java.util.ArrayList;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import android.transition.Fade;
 import android.os.Build;
 import com.example.sailinn.fragments.DetailsTransition;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.example.sailinn.fragments.ListFragment.Person;
+//import com.example.sailinn.fragments.ListFragment.Person;
 
-public class DetailFragment   extends Fragment {
+public class DetailFragment   extends Fragment implements OnMapReadyCallback {
     private View  view;
     private List<Integer> images=new ArrayList<>();
     int dotscount=0;
     ImageView[]  dots;
+    MapView mMapView;
+    private GoogleMap mgoogleMap;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_detail, container, false);
-
+        getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         getActivity().findViewById(R.id.bottom_navigation).setVisibility(View.GONE);
         Toolbar mToolbar = getActivity().findViewById(R.id.toolbar);
         mToolbar.setVisibility(View.GONE);
@@ -53,6 +68,32 @@ public class DetailFragment   extends Fragment {
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
         );
 
+
+
+     /*   try {
+            MapsInitializer.initialize(getActivity().getApplicationContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+/*
+       mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap mMap) {
+                googleMap = mMap;
+                // For showing a move to my location button
+                googleMap.setMyLocationEnabled(true);
+
+                // For dropping a marker at a point on the Map
+                LatLng sydney = new LatLng(-34, 151);
+                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+
+
+                // For zooming automatically to the location of the marker
+               // CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+               // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        });*/
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbark);
 
@@ -128,6 +169,28 @@ public class DetailFragment   extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+     super.onViewCreated(view, savedInstanceState);
+        mMapView = (MapView) view.findViewById(R.id.mapView);
+        mMapView.onCreate(null);
+        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+        mgoogleMap= googleMap;
+        // For showing a move to my location button
+        //mgoogleMap.setMyLocationEnabled(true);
+
+        // For dropping a marker at a point on the Map
+        LatLng kolimpithra  = new LatLng(37.6304, 25.1444);
+        mgoogleMap.addMarker(new MarkerOptions().position(kolimpithra).title("kolimpithra").snippet("kolimpithra"));
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(kolimpithra).zoom(12).build();
+        mgoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
   /*  private void initializeData(){
         persons = new ArrayList<>();
         persons.add(new Person("Emma Wilson", "23 years old", R.drawable.bars));

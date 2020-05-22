@@ -281,16 +281,24 @@ public class MainFragment extends Fragment implements OnBackPressed {
 
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                // Toast.makeText(view.getContext(), "You Clicked at " +web[+ position], Toast.LENGTH_SHORT).show();
-
+                Bundle args = new Bundle();
+                if (position == 0){
+                     args.putString("Origin", "Beach");
+                }
+                else if (position == 1){
+                    args.putString("Origin", "Lunch");
+                }
+                else {
+                    args.putString("Origin", "");
+                }
+                ListFragment listFragment = new ListFragment();
+                listFragment.setArguments(args);
                 android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-
-                ft.replace(R.id.headlines_fragment, new ListFragment());
-
+                ft.replace(R.id.headlines_fragment,  listFragment);
                 ft.addToBackStack(null);
                ft.commit();
             }

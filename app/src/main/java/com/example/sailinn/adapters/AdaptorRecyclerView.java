@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sailinn.R;
-import com.example.sailinn.fragments.ListFragment.Person;
+//import com.example.sailinn.fragments.ListFragment.Person;
 import com.example.sailinn.helper.FavDB;
 import com.example.sailinn.model.ListItem;
 
